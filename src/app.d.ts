@@ -1,7 +1,6 @@
-// src/app.d.ts
 /// <reference lib="webworker" />
 
-declare var self: ServiceWorkerGlobalScope;
+declare const self: ServiceWorkerGlobalScope;
 
 interface ServiceWorkerGlobalScopeEventMap {
 	install: ExtendableEvent;

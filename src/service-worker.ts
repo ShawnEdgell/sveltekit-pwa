@@ -3,7 +3,10 @@
 const CACHE_NAME = 'cache-v1';
 const ASSETS = [
 	'/',
-	'/src/app.html'
+	'/favicon.png',
+	'/manifest.json',
+	'/build/service-worker.js',
+	'/build/workbox-*.js'
 	// Add other assets to cache
 ];
 
