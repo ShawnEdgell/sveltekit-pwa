@@ -6,7 +6,7 @@ Welcome to the SvelteKit PWA Template! This project is a simple and efficient te
 
 ## 🛠️ Getting Started
 
-To get started, clone the repository with `git clone https://github.com/ShawnEdgell/sveltekit-pwa-template.git` and navigate to the project directory with `cd sveltekit-pwa-template`. Install dependencies using `npm install`, then start the development server with `npm run dev` and open your browser to `http://localhost:3000`.
+To get started, clone the repository with `git clone https://github.com/ShawnEdgell/sveltekit-pwa.git` and navigate to the project directory with `cd sveltekit-pwa`. Install dependencies using `npm install`, then start the development server with `npm run dev` and open your browser to `http://localhost:5173`.
 
 ## 📦 Production Build
 
