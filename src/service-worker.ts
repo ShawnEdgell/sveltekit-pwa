@@ -5,17 +5,25 @@ const ASSETS = [
 	'/',
 	'/favicon.png',
 	'/manifest.json',
-	'/build/service-worker.js',
-	'/build/workbox-*.js'
-	// Add other assets to cache
+	'/icons/icon-192x192.svg',
+	'/icons/icon-512x512.svg'
+	// Add other assets you want to cache
 ];
 
-self.addEventListener('install', (event: ExtendableEvent) => {
-	event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));
+self.addEventListener('install', (event: Event) => {
+	const installEvent = event as ExtendableEvent;
+	installEvent.waitUntil(
+		caches.open(CACHE_NAME).then((cache) => {
+			return cache.addAll(ASSETS).catch((err) => {
+				console.error('Failed to cache', err);
+			});
+		})
+	);
 });
 
-self.addEventListener('activate', (event: ExtendableEvent) => {
-	event.waitUntil(
+self.addEventListener('activate', (event: Event) => {
+	const activateEvent = event as ExtendableEvent;
+	activateEvent.waitUntil(
 		caches.keys().then((cacheNames) => {
 			return Promise.all(
 				cacheNames.map((cacheName) => {
@@ -28,18 +36,19 @@ self.addEventListener('activate', (event: ExtendableEvent) => {
 	);
 });
 
-self.addEventListener('fetch', (event: FetchEvent) => {
-	event.respondWith(
-		caches.match(event.request).then((response) => {
-			if (response) {
-				return response;
-			}
-			return fetch(event.request).then((fetchResponse) => {
-				return caches.open(CACHE_NAME).then((cache) => {
-					cache.put(event.request, fetchResponse.clone());
-					return fetchResponse;
-				});
-			});
+self.addEventListener('fetch', (event: Event) => {
+	const fetchEvent = event as FetchEvent;
+	fetchEvent.respondWith(
+		caches.match(fetchEvent.request).then((response) => {
+			return (
+				response ||
+				fetch(fetchEvent.request).then((fetchResponse) => {
+					return caches.open(CACHE_NAME).then((cache) => {
+						cache.put(fetchEvent.request, fetchResponse.clone());
+						return fetchResponse;
+					});
+				})
+			);
 		})
 	);
 });
