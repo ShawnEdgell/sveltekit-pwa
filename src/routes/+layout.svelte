@@ -13,6 +13,7 @@
 			// Check if the app is already installed
 			window.addEventListener('appinstalled', () => {
 				isInstalled.set(true);
+				showInstallButton.set(false);
 			});
 
 			// Check for the beforeinstallprompt event
@@ -21,6 +22,12 @@
 				deferredPrompt = e;
 				showInstallButton.set(true);
 			});
+
+			// Check if the app is already installed (especially for iOS)
+			if (window.matchMedia('(display-mode: standalone)').matches) {
+				isInstalled.set(true);
+				showInstallButton.set(false);
+			}
 		}
 	});
 
