@@ -36,6 +36,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@tailwindcss/typography": "^0.5.13",
 		"workbox-build": "^7.1.1"
 	}
 }
