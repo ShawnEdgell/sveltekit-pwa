@@ -3,8 +3,7 @@
 const CACHE_NAME = 'cache-v1';
 const ASSETS = [
 	'/',
-	'/index.html',
-	'/main.js'
+	'/src/app.html'
 	// Add other assets to cache
 ];
 
